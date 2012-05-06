@@ -16,7 +16,7 @@
 class DirectoryLister {
     
     // Define application version
-    const VERSION = '2.0.0-dev';
+    const VERSION = '2.1.0';
     
     // Reserve some variables
     protected $_themeName     = NULL;
@@ -25,6 +25,7 @@ class DirectoryLister {
     protected $_appURL        = NULL;
     protected $_config        = NULL;
     protected $_systemMessage = NULL;
+	protected $_logFile		  = NULL;
     
     
     /**
@@ -45,14 +46,24 @@ class DirectoryLister {
         
         // Load the configuration file
         $configFile = $this->_appDir . '/config.php';
-        
-        // Set the config array to a global variable
+
+		// Set the config array to a global variable
         if (file_exists($configFile)) {
             $this->_config = require_once($configFile);
         } else {
             $this->setSystemMessage('error', '<b>ERROR:</b> Unable to locate application config file');
         }
         
+		// Load the log file
+        $log = $this->_appDir . '/log';
+        
+		// Set the config file to a global variable
+		if (file_exists($log) && is_writable($log)) {
+			$this->_logFile = $log;
+		} else {
+			$this->setSystemMessage('error', '<b>ERROR:</b> Unable to locate log file');
+		}
+		
         // Set the theme name
         $this->_themeName = $this->_config['theme_name'];
         
@@ -299,6 +310,9 @@ class DirectoryLister {
         // Get directory contents
         $files = scandir($directory);
         
+		// Get fresh download count data
+		$dllog = $this->_read_log();
+		
         // Read files/folders from the directory
         foreach ($files as $file) {
             
@@ -348,6 +362,7 @@ class DirectoryLister {
                         $directoryArray['..'] = array(
                             'file_path'  => $this->_appURL . $directoryPath,
                             'file_size'  => '-',
+							'file_downloads' => '-',
                             'mod_time'   => date('Y-m-d H:i:s', filemtime($realPath)),
                             'icon_class' => 'icon-up-dir',
                             'sort'       => 0
@@ -355,12 +370,20 @@ class DirectoryLister {
                     }
                     
                 } elseif (!$this->_isHidden($relativePath)) {
-                    
                     // Add all non-hidden files to the array
                     if ($this->_directory != '.' || $file != 'index.php') {
+	                    // Get donwload counts
+						if (@array_key_exists($relativePath,$dllog)) {				
+							$downloads = $dllog[$relativePath];
+						}
+						else {
+							$downloads = '0';
+						}
+						// Add data to array
                         $directoryArray[pathinfo($realPath, PATHINFO_BASENAME)] = array(
                             'file_path'  => $relativePath,
                             'file_size'  => is_dir($realPath) ? '-' : round(filesize($realPath) / 1024) . 'KB',
+							'file_downloads' => is_dir($realPath) ? '-' : $downloads,
                             'mod_time'   => date('Y-m-d H:i:s', filemtime($realPath)),
                             'icon_class' => $iconClass,
                             'sort'       => $sort
@@ -372,7 +395,6 @@ class DirectoryLister {
 
         }
  
-
         // Sort the array
         $sortedArray = $this->_arraySort($directoryArray, $this->_config['list_sort_order']);
         
@@ -380,7 +402,36 @@ class DirectoryLister {
         return $sortedArray;
 
     }
-
+	
+	// Function to read the log file, and return an array as (filename => downloads)
+	private function _read_log()	{
+		
+		// Declare Array for holding data read from log file
+		$name = array(); // array for file name
+		$count = array(); // array for file count
+		
+		$file = @file($this->_logFile);
+		if(empty($file))
+		{
+			return null;
+		}
+			
+		// Read the entire contents of the log file into the arrays 
+		$file = fopen($this->_logFile,"r");
+		while ($data = fscanf($file,"%[ -~]\t%d\n")) 
+		{
+			list ($temp1, $temp2) = $data;	
+			array_push($name,$temp1);
+			array_push($count,$temp2);
+		}
+		fclose($file);
+		// $file_list contains data read from the log file as an array (filename => count)
+		$file_list=@array_combine($name,$count); 
+		ksort($file_list); // Sorting it in alphabetical order of key
+		
+		return $file_list;
+		
+	}
 
     /**
     * Sorts an array by the provided sort method.
@@ -463,7 +514,7 @@ class DirectoryLister {
         return $sortedArray;
         
     }
-    
+	
     
     /**
      * Determines if a file is supposed to be hidden

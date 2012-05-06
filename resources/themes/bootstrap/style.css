@@ -71,10 +71,18 @@ body.breadcrumb-fixed {
     float: left;
     margin: 8px;
     overflow: hidden;
-    width: 645px;
+    width: 545px;
 }
 
 #header .fileSize {
+    display: inline-block;
+    float: left;
+    margin: 8px;
+    text-align: right;
+    width: 100px;
+}
+
+#header .fileDownloads {
     display: inline-block;
     float: left;
     margin: 8px;
@@ -146,10 +154,20 @@ body.breadcrumb-fixed {
     margin: 8px;
     overflow: hidden;
     white-space: nowrap;
-    width: 625px;
+    width: 545px;
 }
 
 #directoryListing .fileSize {
+    display: inline-block;
+    float: left;
+    margin: 8px;
+    overflow: hidden;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px;
+}
+
+#directoryListing .fileDownloads {
     display: inline-block;
     float: left;
     margin: 8px;

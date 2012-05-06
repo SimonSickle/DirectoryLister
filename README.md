@@ -1,6 +1,7 @@
 Directory Lister - The simple PHP directory lister
 ==================================================
 Created by, [Chris Kankiewicz](http://www.ChrisKankiewicz.com)
+Download Counter added by Obihörnchen (http://obihoernchen.net). Using some code of srinath's dScript (http://iambot.net/projects/dscript/)
 
 
 Introduction
@@ -19,6 +20,7 @@ Features
   * Creates on-the-fly listing of any web-accessable directory
   * Custimizable sort order of files/folders
   * Easily define hidden files to be excluded from the listing
+  * Count downloads
 
 
 Requirements
@@ -32,7 +34,7 @@ Installation
   1. Upload `index.php` and the `resources` folder to the directory that you would like to be listed
   2. Copy `resources/default.config.php` to `resources/config.php`
   3. Navigate to your page in any browser to see the directory listing
-
+  4. Set permission of `/resources/log` to 777
 
 Support
 -------

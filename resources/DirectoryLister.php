@@ -16,7 +16,7 @@
 class DirectoryLister {
     
     // Define application version
-    const VERSION = '2.1.0';
+    const VERSION = '2.1.1';
     
     // Reserve some variables
     protected $_themeName     = NULL;
@@ -236,6 +236,22 @@ class DirectoryLister {
         }
     }
     
+	/**
+	 * Get total download count.
+	 * 
+	 * @return download number
+     * @access public
+     */	
+	public function getTotalDownloads() {
+	
+		// Get fresh download count data
+		$dllog = $this->_read_log();
+		
+		// Get total download count
+		$totaldls = array_sum($dllog);
+		return $totaldls;
+	}
+	
     /**
      * Validates and returns the directory path
      * 
@@ -373,7 +389,7 @@ class DirectoryLister {
                     // Add all non-hidden files to the array
                     if ($this->_directory != '.' || $file != 'index.php') {
 	                    // Get donwload counts
-						if (@array_key_exists($relativePath,$dllog)) {				
+						if (@array_key_exists($relativePath,$dllog)) {
 							$downloads = $dllog[$relativePath];
 						}
 						else {
@@ -404,7 +420,7 @@ class DirectoryLister {
     }
 	
 	// Function to read the log file, and return an array as (filename => downloads)
-	private function _read_log()	{
+	private function _read_log() {
 		
 		// Declare Array for holding data read from log file
 		$name = array(); // array for file name

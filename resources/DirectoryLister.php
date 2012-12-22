@@ -333,17 +333,15 @@ class DirectoryLister {
         foreach ($files as $file) {
             
             if ($file != '.') {
-                
                 // Get files relative path
                 $relativePath = $directory . '/' . $file;
-                
                 if (substr($relativePath, 0, 2) == './') {
                     $relativePath = substr($relativePath, 2);
                 }
                 
                 // Get files absolute path
                 $realPath = realpath($relativePath);
-                
+
                 // Determine file type by extension
                 if (is_dir($realPath)) {
                     $iconClass = 'icon-folder';
@@ -610,6 +608,13 @@ class DirectoryLister {
         $appUrl = $protocol . $host . $path;
         
         // Return the URL
+//	require ('dbconnect.php');
+//	$filename = $appUrl;
+//	$time = date('U');
+//	$key = uniqid(md5(rand()));
+//	$registerid = mysql_query("INSERT INTO downloadkey (uniqueid,timestamp) VALUES(\"$key\",\"$time\")") or die(mysql_error());
+//echo $realPath;
+//echo $appUrl;
         return $appUrl;
     }
     

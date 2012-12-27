@@ -110,7 +110,7 @@ if (!$row) {
 			// use the Content-Disposition header to supply a recommended filename and
 			// force the browser to display the save dialog.
 
-			@header("Content-Disposition: attachment; filename=\"".basename($fname)."\";" );
+			@header("Content-Disposition: attachment; filename=\"".basename($fname)."\"" );
 
 			/*
 			The Content-transfer-encoding header should be binary, since the file will be read

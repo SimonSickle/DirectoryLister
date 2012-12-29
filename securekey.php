@@ -23,6 +23,20 @@ require ('dbconnect.php');
 
 // Write the key and activation time to the database as a new row.
 	$registerid = mysql_query("INSERT INTO downloadkey (uniqueid,timestamp,filename) VALUES(\"$key\",\"$time\",\"$file\")") or die(mysql_error());
+
+// Create the filename
+function curPageURL() {
+ $pageURL = 'http';
+ if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+ $pageURL .= "://";
+ if ($_SERVER["SERVER_PORT"] != "80") {
+  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+ } else {
+  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+ }
+ return $pageURL;
+}
+
 ?>
 
 <DOCUTYPE html>
@@ -35,7 +49,15 @@ require ('dbconnect.php');
 </script>
 </head>
 <body>
-<p> <?php echo "downloading: " . $file . " Redirecting in 10 seconds"; ?> </p>
+<p>
+<center>
+<?php
+$filename = basename($file);
+$link = curpageURL();
+echo "Downloading <br>";
+echo "<a href=\"$link\">$filename</a> <br>";
+echo "Redirecting in 10 seconds"; ?> </p>
+
 <p>Click here if you are not redirected automatically in 10 seconds<br/>
             <a href="<?php echo $_SERVER['REQUEST_URI']; ?>">Get More Files</a>.
 </p>

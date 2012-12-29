@@ -23,10 +23,6 @@ require ('dbconnect.php');
 
 // Write the key and activation time to the database as a new row.
 	$registerid = mysql_query("INSERT INTO downloadkey (uniqueid,timestamp,filename) VALUES(\"$key\",\"$time\",\"$file\")") or die(mysql_error());
-
-// Redirect to the download
-echo '<META HTTP-EQUIV="Refresh" Content="0; URL=download.php?id=' . $key . '">';
-//show HTML below for 5 seconds
 ?>
 
 <DOCUTYPE html>
@@ -43,5 +39,10 @@ echo '<META HTTP-EQUIV="Refresh" Content="0; URL=download.php?id=' . $key . '">'
 <p>Click here if you are not redirected automatically in 10 seconds<br/>
             <a href="<?php echo $_SERVER['REQUEST_URI']; ?>">Get More Files</a>.
 </p>
+<?php
+// Redirect to the download
+echo '<META HTTP-EQUIV="Refresh" Content="0; URL=download.php?id=' . $key . '">';
+//show HTML below for 5 seconds
+?>
 </body>
 </html>

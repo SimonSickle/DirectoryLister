@@ -20,15 +20,21 @@ else
 
 mysql_select_db("FileDownloads", $con);
 
-$sql = "CREATE TABLE downloadkey
+$dltbl = "CREATE TABLE downloadkey
 (
 uniqueid varchar(255) NOT NULL default '',
 timestamp varchar(255) NOT NULL default '',
 filename varchar(255) NOT NULL default '',
-downloads varchar(255) NOT NULL default '0',
+downloads varchar(255) NOT NULL default '0'
 )";
+mysql_query($dltbl,$con);
 
-mysql_query($sql,$con);
+$md5tbl = "CREATE TABLE md5sums
+(
+filename varchar(255) NOT NULL default '',
+md5 varchar(255) NOT NULL default ''
+)";
+mysql_query($md5tbl,$con);
 
 mysql_close($con);
 echo "WARNING YOU MUST REMOVE THIS FILE OR SUFFER THE CONSEQUINCES!!!"

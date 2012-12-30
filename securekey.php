@@ -61,6 +61,8 @@ if (file_exists($filemd5)) {
 $md5string = file_get_contents($filemd5);
 $cleanmd5 = substr($md5string, 0, strpos($md5string, ' '));
 echo("md5: " . $cleanmd5 . "</br>");
+} else {
+echo("md5: " . md5_file($file) . "</br>");
 }
 echo "Redirecting in 10 seconds"; ?> </p>
 

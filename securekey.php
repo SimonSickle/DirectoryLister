@@ -56,6 +56,12 @@ $filename = basename($file);
 $link = curpageURL();
 echo "Downloading <br>";
 echo "<a href=\"$link\">$filename</a> <br>";
+$filemd5 = $file . ".md5";
+if (file_exists($filemd5)) {
+$md5string = file_get_contents($filemd5);
+$cleanmd5 = substr($md5string, 0, strpos($md5string, ' '));
+echo("md5: " . $cleanmd5 . "</br>");
+}
 echo "Redirecting in 10 seconds"; ?> </p>
 
 <p>Click here if you are not redirected automatically in 10 seconds<br/>

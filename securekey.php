@@ -72,7 +72,7 @@ echo "Redirecting in 10 seconds"; ?> </p>
 </p>
 <?php
 // Redirect to the download
-echo '<META HTTP-EQUIV="Refresh" Content="0; URL=download.php?id=' . $key . '">';
+echo '<META HTTP-EQUIV="Refresh" Content="2; URL=download.php?id=' . $key . '">';
 //show HTML below for 5 seconds
 ?>
 </body>

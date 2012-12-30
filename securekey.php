@@ -63,6 +63,7 @@ $cleanmd5 = substr($md5string, 0, strpos($md5string, ' '));
 echo("md5: " . $cleanmd5 . "</br>");
 } else {
 echo("md5: " . md5_file($file) . "</br>");
+file_put_contents($filemd5, md5_file($file));
 }
 echo "Redirecting in 10 seconds"; ?> </p>
 

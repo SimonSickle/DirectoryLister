@@ -1,3 +1,49 @@
+<?php 
+
+$limit = 50; 
+$seconds = 60;  
+$block_for_seconds = 300;
+
+$status = 'OK';
+
+$memcache = new Memcache;
+$memcache->connect('localhost', 11211);
+
+$ip = $_SERVER['REMOTE_ADDR'];
+
+$r = $memcache->get($ip, array('c', 't'));
+
+$c = 1; // count
+$init_time = time();
+if($r) {
+  $s = $r[3]; // status
+  $c = $r[0]+1;
+  $init_time = $r[1];
+  if($s == 'TOO_MANY_REQUESTS') {
+    $d = time()-$r[1]; // time since block
+    if($block_for_seconds-$d > 0) {  // still blocked
+      die('Flood detected!! You are going to wait '.($block_for_seconds-$d).' and try again.');
+    } else {  // block is over
+      $status = 'OK';
+      $init_time = time();
+      $c = 0;
+    }
+  }
+
+  $new_time = time();
+  if($c > $limit) {  // check if happened within a minute
+    $time_elapsed = $new_time - $init_time;
+    if($time_elapsed < $seconds) {  
+      $status = 'TOO_MANY_REQUESTS'; 
+    }
+    print "time elapsed: $time_elapsed, count:$c";
+    $c = 0;
+    $init_time = time();
+  }
+}
+$memcache->set($ip, array($c, $init_time, $new_time, $status) );
+?>
+
 <!DOCTYPE html>
 <head>
     <title>Directory listing of <?php echo $lister->getListedPath(); ?></title>

@@ -53,21 +53,20 @@ function curPageURL() {
 <center>
 <?php
 $filename = basename($file);
-$link = curpageURL();
-$ext = pathinfo($filename, PATHINFO_EXTENSION);
-echo "Downloading <br>";
-echo "<a href=\"$link\">$filename</a> <br>";
-$filemd5 = $file . ".md5";
-if ($ext != "md5") {
-if (file_exists($filemd5)) {
-$md5string = file_get_contents($filemd5);
-$cleanmd5 = substr($md5string, 0, strpos($md5string, ' '));
-echo("md5: " . $cleanmd5 . "</br>");
-} else {
-echo("md5: " . md5_file($file) . "</br>");
-file_put_contents($filemd5, md5_file($file));
+echo "<a href=\"$data\">$filename</a>";
+echo "<br><br>";
+$query = sprintf("SELECT * FROM md5sums WHERE filename= '$file'",
+mysql_real_escape_string($id, $link));
+$result = mysql_query($query) or die(mysql_error());
+$row = mysql_fetch_array($result);
+        if (!$row) {
+                $registerid = mysql_query("INSERT INTO md5sums (filename,md5) VALUES(\"$file\",\"$md5\")") or die(mysql_error());
+                $md5 = md5_file($file);
+                echo "MD5: " . $md5;
+        }else{
+                echo "MD5: " . $row[md5];
 }
-}
+echo "<br><br>"
 echo "Redirecting in 10 seconds"; ?> </p>
 
 <p>Click here if you are not redirected automatically in 10 seconds<br/>

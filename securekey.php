@@ -60,8 +60,8 @@ mysql_real_escape_string($id, $link));
 $result = mysql_query($query) or die(mysql_error());
 $row = mysql_fetch_array($result);
         if (!$row) {
+        	$md5 = md5_file($file);
                 $registerid = mysql_query("INSERT INTO md5sums (filename,md5) VALUES(\"$file\",\"$md5\")") or die(mysql_error());
-                $md5 = md5_file($file);
                 echo "MD5: " . $md5;
         }else{
                 echo "MD5: " . $row[md5];

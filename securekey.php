@@ -53,18 +53,20 @@ function curPageURL() {
 <center>
 <?php
 $filename = basename($file);
+$filemd5 = $file . ".md5";
+$ext = pathinfo($filename, PATHINFO_EXTENSION);
 echo "<a href=\"$data\">$filename</a>";
 echo "<br><br>";
-$query = sprintf("SELECT * FROM md5sums WHERE filename= '$file'",
-mysql_real_escape_string($id, $link));
+$query = sprintf("SELECT * FROM md5sums WHERE filename= '%s'",
+mysql_real_escape_string($file));
 $result = mysql_query($query) or die(mysql_error());
 $row = mysql_fetch_array($result);
         if (!$row) {
-        	$md5 = md5_file($file);
-                $registerid = mysql_query("INSERT INTO md5sums (filename,md5) VALUES(\"$file\",\"$md5\")") or die(mysql_error());
+                $md5 = md5_file($file);
+                $sqlread = mysql_query("INSERT INTO md5sums (filename,md5) VALUES(\"$file\",\"$md5\")") or die(mysql_error());
                 echo "MD5: " . $md5;
         }else{
-                echo "MD5: " . $row[md5];
+                echo "MD5: " . $row['md5'];
 }
 echo "<br><br>"
 echo "Redirecting in 10 seconds"; ?> </p>

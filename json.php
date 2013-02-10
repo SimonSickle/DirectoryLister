@@ -1,29 +1,29 @@
-<?php 
+<?php
 
-$ip = $_SERVER['REMOTE_ADDR'];
-
-$x = 1; 
-
-$ar = array();
-
-foreach($lister->listDirectory() as $name=>$fileInfo) {
-
-if(is_dir($fileInfo['file_path'])) {
-	$dirarray = array(
-		"type"=>"folder",
-		"directory"=>$fileInfo['file_path'],
-		"name"=>$name,
-	);
-} else {
-	$filearray = array(
-		"type"=>"file",
-		"path"=>$fileInfo['file_path'],
-		"name"=>$name,
-	);
+function directoryToArray($directory, $recursive) {
+	$array_items = array();
+	if ($handle = opendir($directory)) {
+		while (false !== ($file = readdir($handle))) {
+			if ($file != "." && $file != "..") {
+				if (is_dir($directory. "/" . $file)) {
+					if($recursive) {
+						$array_items = array_merge($array_items, directoryToArray($directory. "/" . $file, $recursive));
+					}
+					$file = $directory . "/" . $file;
+					$array_items[] = $file;
+				} else {
+					$file = $directory."/".$file;
+					$array_items[] = $file;
+				}
+			}
+		}
+		closedir($handle);
+	}
+	return $array_items;
 }
 
-$ar = array_merge($dirarray, $filearray);
-}
-var_dump($ar);
+header('Content-type: application/json');
+echo str_replace("//", "/", str_replace("\/", "/", json_encode(directoryToArray("./", "y"))));
+
 
 ?>

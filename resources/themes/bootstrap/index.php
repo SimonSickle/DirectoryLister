@@ -42,6 +42,15 @@ if($r) {
   }
 }
 $memcache->set($ip, array($c, $init_time, $new_time, $status) );
+
+// Add referer program
+require ('dbconnect.php');
+if(isset($_GET['ref']) && !empty($_GET['ref'])){
+    $ref = $_GET['ref'];
+    mysql_query("UPDATE referer SET count = count + 1 WHERE referer = '".$ref."'$
+} else {
+}
+
 ?>
 
 <!DOCTYPE html>

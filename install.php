@@ -36,6 +36,13 @@ md5 varchar(255) NOT NULL default ''
 )";
 mysql_query($md5tbl,$con);
 
+$reftbl = "CREATE TABLE referer
+(
+referer varchar(255) NOT NULL default '',
+count varchar(255) NOT NULL default '',
+)";
+mysql_query($reftbl,$con);
+
 mysql_close($con);
 echo "WARNING YOU MUST REMOVE THIS FILE OR SUFFER THE CONSEQUINCES!!!"
 ?>

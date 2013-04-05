@@ -1,5 +1,7 @@
 <?php 
+$usememcache = false;
 
+if($usememcache) {
 $limit = 50; 
 $seconds = 60;  
 $block_for_seconds = 300;
@@ -42,6 +44,7 @@ if($r) {
   }
 }
 $memcache->set($ip, array($c, $init_time, $new_time, $status) );
+}
 
 // Add referer program
 require ('dbconnect.php');

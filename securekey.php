@@ -68,7 +68,7 @@ $row = mysql_fetch_array($result);
         }else{
                 echo "MD5: " . $row['md5'];
 }
-echo "<br><br>"
+echo "<br><br>";
 echo "Redirecting in 10 seconds"; ?> </p>
 
 <p>Click here if you are not redirected automatically in 10 seconds<br/>

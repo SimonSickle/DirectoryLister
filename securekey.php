@@ -4,7 +4,14 @@
 require ('dbconnect.php');
 
 	// Get the filename given by directory linker
-	$file = $_GET["file"];
+	$fileget = $_GET["file"];
+	
+	// Prevent downloading outside of directory listing bounds
+	if (substr($fileget, 0, 1) == '/') {
+		$file = substr($fileget, 1);
+	} else {
+		$file = $fileget;
+	}
 
 	if(empty($_SERVER['REQUEST_URI'])) {
     	$_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME'];

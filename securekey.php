@@ -21,11 +21,14 @@ require ('dbconnect.php');
 	$url = preg_replace('/\?.*$/', '', $_SERVER['REQUEST_URI']);
 	$folderpath = 'http://'.$_SERVER['HTTP_HOST'].'/'.ltrim(dirname($url), '/');
 
+	// Add some salt
+        $s1 = md5('GetFilesToday134364529193sad5He%#ll##@@!oSa#ltmy12!@$@');
+        $s2 = rand();
+        $s3 = $s1.md5($s2.rand().$s1).$s1;
+	// Generate the unique download key
+	$key = $s1.$s3.uniqid(md5(rand())).$s2;
 
-// Generate the unique download key
-	$key = uniqid(md5(rand()));
-
-// Get the activation time
+	// Get the activation time
 	$time = date('U');
 
 // Write the key and activation time to the database as a new row.

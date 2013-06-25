@@ -28,14 +28,16 @@ Requirements
 ------------
 
 Directory Lister requires PHP 5.3+ to work properly.  For more information on PHP, please visit
-<http://www.php.net>.
+<http://www.php.net>. Php also requires mysql support. You need a mysql server installed and running.
 
 
 Installation
 ------------
 
-  1. Upload `index.php` and the `resources` folder to the folder you want listed
-  2. Upload additional files to the same directory as index.php
+  1. Setup information in dbconnect.php for your MySQL settings
+  2. Upload the root of this folder to document root of your site
+  3. Run the install.php, then delete it.
+  4. Upload additional files to the same directory as index.php
 
 
 Troubleshooting

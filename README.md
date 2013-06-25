@@ -1,6 +1,7 @@
 Directory Lister - The simple PHP directory lister
 ==================================================
 Created by, [Chris Kankiewicz](http://www.ChrisKankiewicz.com)
+Modified by, [Simon Sickle](http://simonsickle.com)
 
 
 Introduction
@@ -33,9 +34,8 @@ Directory Lister requires PHP 5.3+ to work properly.  For more information on PH
 Installation
 ------------
 
-  1. Copy `resources/default.config.php` to `resources/config.php`
-  2. Upload `index.php` and the `resources` folder to the folder you want listed
-  3. Upload additional files to the same directory as index.php
+  1. Upload `index.php` and the `resources` folder to the folder you want listed
+  2. Upload additional files to the same directory as index.php
 
 
 Troubleshooting
@@ -57,10 +57,10 @@ Contact us via our mailling list at [Directory-Lister@GoogleGroups.com](mailto:D
 or [join our Google Group](https://groups.google.com/forum/?fromgroups#!forum/directory-lister) online.
 
 Follow Directory Lister on Twitter at [@DirectoryLister](https://twitter.com/directorylister) or
-follow the developer at [@PHLAK](https://twitter.com/PHLAK)
+follow the developer at [@simonsimons34](https://twitter.com/simonsimons34)
 
 Find a problem or bug with Directory Lister?
-[Open an issue](https://github.com/DirectoryLister/DirectoryLister/issues) on GitHub.
+[Open an issue](https://github.com/SimonSickle/DirectoryLister/issues) on GitHub.
 
 
 License
@@ -69,3 +69,4 @@ License
 Directory Lister is distributed under the terms of the
 [MIT License](http://www.opensource.org/licenses/mit-license.php).
 Copyright 2013 [Chris Kankiewicz](http://www.chriskankiewicz.com)
+Parts Copyright (c) 2013 [Simon Sickle](<simon@simonsickle.com>)

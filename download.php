@@ -49,7 +49,7 @@ if (!$row) {
 					$incrementdownloads = mysql_query($sql) or die(mysql_error());
 					$path = getcwd();
 					//Check for various invalid files, and loop holes like ../ and ./
-						if($fname == '.' || $fname == './' || $fname == "download.php" || $fname == "index.php" || !file_exists($fname) || empty($fname) || preg_match('/\..\/|\.\/\.|resources/',$fname))
+						if($fname == '.' || $fname == './' || $fname == "download.php" || $fname == "index.php" || !file_exists($fname) || empty($fname) || preg_match('/\..\|\.\|\.|resources/',$fname))
 						{
 							echo "Invalid File or File Not Specified";
 							exit(0);

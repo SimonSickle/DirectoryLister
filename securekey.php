@@ -7,11 +7,12 @@ require ('dbconnect.php');
 	$fileget = $_GET["file"];
 	
 	// Prevent downloading outside of directory listing bounds
-	if (substr($fileget, 0, 1) == '/') {
-		$file = substr($fileget, 1);
-	} else {
-		$file = $fileget;
-	}
+	if (substr($fileget, 0, 1) == '/' || !isset($_GET['file'])) {
+                header( 'Location: http://www.' . $siteName ) ;
+        } else {
+                $file = $fileget;
+        }
+
 
 	if(empty($_SERVER['REQUEST_URI'])) {
     	$_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME'];

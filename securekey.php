@@ -8,7 +8,7 @@ require ('dbconnect.php');
 	
 	// Prevent downloading outside of directory listing bounds
 	if (substr($fileget, 0, 1) == '/' || !isset($_GET['file'])) {
-                header( 'Location: http://www.' . $siteName ) ;
+                echo '<META HTTP-EQUIV="Refresh" Content="2; URL=index.php">';
         } else {
                 $file = $fileget;
         }
@@ -83,7 +83,7 @@ echo "<br><br>";
 echo "Redirecting in 10 seconds"; ?> </p>
 
 <p>Click here if you are not redirected automatically in 10 seconds<br/>
-            <a href="<?php echo $_SERVER['REQUEST_URI']; ?>">Get More Files</a>.
+            <a href="index.php">Get More Files</a>.
 </p>
 <?php
 // Redirect to the download

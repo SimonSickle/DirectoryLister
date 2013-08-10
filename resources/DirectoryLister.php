@@ -183,13 +183,13 @@ class DirectoryLister {
     public function getThemePath($absolute = false) {
         if ($absolute) {
             // Set the theme path
-            $themePath = $this->_appDir . '/themes/' . $this->_themeName;
+            $themePath = '/' . $this->_appDir . '/themes/' . $this->_themeName;
         } else {
             // Get relative path to application dir
             $realtivePath = $this->_getRelativePath(getcwd(), $this->_appDir);
 
             // Set the theme path
-            $themePath = $realtivePath . '/themes/' . $this->_themeName;
+            $themePath = '/' . $realtivePath . '/themes/' . $this->_themeName;
         }
 
         return $themePath;

@@ -58,10 +58,23 @@ function curPageURL() {
                         location.href = 'index.php';
                     }, 10000);
 </script>
+</script>
 </head>
 <body>
 <p>
 <center>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-1176090905311710";
+/* DirectoryLister-GH */
+google_ad_slot = "4739112259";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+<br>
+<br>
 <?php
 $filename = basename($file);
 $filemd5 = $file . ".md5";

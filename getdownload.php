@@ -13,6 +13,9 @@ require ('dbconnect.php');
 	if(strpos($file,".ph")!==false)
 		die("Fucking retard, you didn't think this would actually work did you?.");
 
+	 if(strpos($file,"://")!==false)
+	 	die("SREALLY? REALLY????...LE SIGH");
+
 	while (substr($file, 0, 1) == '/') {
 		$file = substr($file, 1);
 	}

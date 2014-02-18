@@ -10,7 +10,7 @@ require ('dbconnect.php');
 	if(strpos($file,"../")!==false)
 		die("Fuck off you retard this is blocked.");
 
-	if(strpos($file,".ph")!==false)
+	if(strpos($file,".php")!==false)
 		die("Fucking retard, you didn't think this would actually work did you?.");
 
 	 if(strpos($file,"://")!==false)

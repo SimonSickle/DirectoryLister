@@ -4,13 +4,17 @@
 require ('dbconnect.php');
 
 	// Get the filename given by directory linker
-	$fileget = $_GET["file"];
+	$file = $_GET["file"];
 	
 	// Prevent downloading outside of directory listing bounds
-	if (substr($fileget, 0, 1) == '/') {
-		$file = substr($fileget, 1);
-	} else {
-		$file = $fileget;
+	if(strpos($file,"../")!==false)
+		die("Fuck off you retard this is blocked.");
+
+	if(strpos($file,".ph")!==false)
+		die("Fucking retard, you didn't think this would actually work did you?.");
+
+	while (substr($file, 0, 1) == '/') {
+		$file = substr($file, 1);
 	}
 
 	if(empty($_SERVER['REQUEST_URI'])) {
@@ -52,7 +56,7 @@ function curPageURL() {
 
 <DOCUTYPE html>
 <head>
-<title> Sick Files </title>
+<title> kanger.me </title>
 <script type="text/javascript">
                     window.setTimeout(function() {
                         location.href = 'index.php';

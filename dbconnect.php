@@ -2,8 +2,8 @@
 //Your mysql host goes here (localhost unless your using a remote server)
 $host = 'localhost';
 //Your mysql username and password
-$user = 'root';
-$password = 'Password';
+$user = 'boobies';
+$password = 'Th1515myp455w0rd';
 //The name of the database you are going to use
 $dbname = 'FileDownloads';
 
